@@ -20,9 +20,7 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    private User user;
-
+    private String author;
     private String title;
     private String content;
 
@@ -30,9 +28,9 @@ public class Board {
     private Timestamp createdAt;
 
     @Builder
-    public Board(Integer id, User user, String title, String content, Timestamp createdAt) {
+    public Board(Integer id, String author, String title, String content, Timestamp createdAt) {
         this.id = id;
-        this.user = user;
+        this.author = author;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
@@ -47,7 +45,7 @@ public class Board {
     public String toString() {
         return "Board{" +
                 "id=" + id +
-                ", user=" + user +
+                ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", createdAt=" + createdAt +

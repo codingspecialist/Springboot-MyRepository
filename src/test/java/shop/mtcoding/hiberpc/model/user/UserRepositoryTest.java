@@ -7,10 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-import shop.mtcoding.hiberpc.config.dummy.MyDummyEntity;
+import shop.mtcoding.hiberpc.model.MyDummyEntity;
 
 import javax.persistence.EntityManager;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,16 +43,33 @@ public class UserRepositoryTest extends MyDummyEntity {
     }
 
     @Test
+    public void findById_test(){
+        // given 1 - DB에 영속화
+        userRepository.save(newUser("ssar"));
+        em.clear();
+
+        // given 2
+        int id = 1;
+
+        // when
+        User userPS = userRepository.findById(id);
+
+        // then
+        assertThat(userPS.getUsername()).isEqualTo("ssar");
+    }
+
+    @Test
     public void update_test(){
         // given 1 - DB에 영속화
-        User user = newUser("ssar");
-        User userPS = userRepository.save(user);
+        userRepository.save(newUser("ssar"));
+        em.clear();
 
         // given 2 - request 데이터
         String password = "5678";
         String email = "ssar@gmail.com";
 
         // when
+        User userPS = userRepository.findById(1);
         userPS.update(password, email);
         User updateUserPS = userRepository.save(userPS);
 
@@ -64,14 +80,15 @@ public class UserRepositoryTest extends MyDummyEntity {
     @Test
     public void update_dutty_checking_test(){
         // given 1 - DB에 영속화
-        User user = newUser("ssar");
-        User userPS = userRepository.save(user);
+        userRepository.save(newUser("ssar"));
+        em.clear();
 
         // given 2 - request 데이터
         String password = "5678";
         String email = "ssar@gmail.com";
 
         // when
+        User userPS = userRepository.findById(1);
         userPS.update(password, email);
         em.flush();
 
@@ -83,8 +100,8 @@ public class UserRepositoryTest extends MyDummyEntity {
     @Test
     public void delete_test(){
         // given 1 - DB에 영속화
-        User user = newUser("ssar");
-        userRepository.save(user);
+        userRepository.save(newUser("ssar"));
+        em.clear();
 
         // given 2 - request 데이터
         int id = 1;
@@ -99,28 +116,13 @@ public class UserRepositoryTest extends MyDummyEntity {
     }
 
     @Test
-    public void findById_test(){
-        // given 1 - DB에 영속화
-        User user = newUser("ssar");
-        userRepository.save(user);
-
-        // given 2
-        int id = 1;
-
-        // when
-        User userPS = userRepository.findById(id);
-
-        // then
-        assertThat(userPS.getUsername()).isEqualTo("ssar");
-    }
-
-    @Test
     public void findAll_test(){
         // given
         List<User> userList = Arrays.asList(newUser("ssar"), newUser("cos"));
         userList.stream().forEach((user)->{
             userRepository.save(user);
         });
+        em.clear();
 
         // when
         List<User> userListPS = userRepository.findAll();

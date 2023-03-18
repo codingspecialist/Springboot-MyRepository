@@ -14,17 +14,11 @@ public class MyDummyEntity {
     }
 
 
-    protected Board newBoard(String title, User userPS){
-
-        if(userPS.getId() == null){
-            System.out.println("영속화해서 넣어라!!");
-            return null;
-        }
-
+    protected Board newBoard(String title){
         return Board.builder()
                 .title(title)
                 .content(title)
-                .user(userPS)
+                .author("홍길동")
                 .build();
     }
 }
