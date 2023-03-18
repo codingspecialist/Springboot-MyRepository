@@ -1,6 +1,5 @@
 package shop.mtcoding.hiberpc.model.board;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

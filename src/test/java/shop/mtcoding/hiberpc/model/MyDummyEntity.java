@@ -1,10 +1,7 @@
-package shop.mtcoding.hiberpc.config.dummy;
+package shop.mtcoding.hiberpc.model;
 
 import shop.mtcoding.hiberpc.model.board.Board;
 import shop.mtcoding.hiberpc.model.user.User;
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class MyDummyEntity {
 
