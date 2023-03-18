@@ -3,15 +3,12 @@ package shop.mtcoding.hiberpc.model.board;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import shop.mtcoding.hiberpc.model.user.User;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @NoArgsConstructor
-@Setter
 @Getter
 @Table(name = "board_tb")
 @Entity
